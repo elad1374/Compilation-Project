@@ -1,0 +1,4 @@
+bin/
+src/Lexer.java
+*.class
+output/
