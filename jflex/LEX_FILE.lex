@@ -41,6 +41,9 @@ import java_cup.runtime.*;
 /******************************************************************/
 %cup
 
+%state YYCOMMENT_1
+%state YYCOMMENT_2
+
 /****************/
 /* DECLARATIONS */
 /****************/
@@ -79,14 +82,7 @@ ID				  = [a-zA-Z][0-9a-zA-Z]*
 STRING			  = \"[a-zA-Z]*\"
 INVALID_STRING    = \"[^\r\n\"]*\"
 UNCLOSED_STRING   = \"[^\r\n\"]*
-
-COMMENT_CHAR            = [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\*\/\.\;]
-COMMENT_CHAR_NO_STAR	= [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\/\.\;]
-COMMENT_TYPE_1          = \/\/{COMMENT_CHAR}*{LineTerminator}
-INVALID_COMMENT_TYPE_1  = \/\/[^\r\n]*{LineTerminator}
-UNCLOSED_COMMENT_TYPE_1 = \/\/[^\r\n]*
-
-
+COMMENT_CHAR      = [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\*\/\.\;]
 
 /******************************/
 /* DOLLAR DOLLAR - DON'T TOUCH! */
@@ -140,7 +136,7 @@ UNCLOSED_COMMENT_TYPE_1 = \/\/[^\r\n]*
 "string" 			{ return symbol(TokenNames.TYPE_STRING);}
 "void" 				{ return symbol(TokenNames.TYPE_VOID);}
 
-{STRING}{ 
+{STRING} 			{ 
 	String text = yytext();
 	text = text.substring(1, text.length() - 1);
 	return symbol(TokenNames.STRING, text);
@@ -157,13 +153,27 @@ UNCLOSED_COMMENT_TYPE_1 = \/\/[^\r\n]*
 }
 {INVALID_0_INTEGER} { return symbol(TokenNames.LEXICAL_ERROR);}
 
-{COMMENT_TYPE_1} 		  { /* ignore */}
-{INVALID_COMMENT_TYPE_1}  { return symbol(TokenNames.LEXICAL_ERROR);}
-{UNCLOSED_COMMENT_TYPE_1} { return symbol(TokenNames.LEXICAL_ERROR);}
+"//" { yybegin(YYCOMMENT_1); }
+"/*" { yybegin(YYCOMMENT_2); }
 
 {ID} 				{ return symbol(TokenNames.ID, yytext());}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 
-. 					{ return symbol(TokenNames.LEXICAL_ERROR);}
+[^] 				{ return symbol(TokenNames.LEXICAL_ERROR);}
+}
+
+
+<YYCOMMENT_1> {
+    {LineTerminator}    { yybegin(YYINITIAL);}
+    <<EOF>>             { yybegin(YYINITIAL); return symbol(TokenNames.EOF);} 
+    {COMMENT_CHAR}      { /*ignore*/}
+    [^]                 { return symbol(TokenNames.LEXICAL_ERROR); }
+}
+
+<YYCOMMENT_2> {
+    "*/"                { yybegin(YYINITIAL); }
+    <<EOF>>             { return symbol(TokenNames.LEXICAL_ERROR); } 
+    {COMMENT_CHAR}      { /*ignore*/}
+    [^]                 { return symbol(TokenNames.LEXICAL_ERROR); } 
 }
