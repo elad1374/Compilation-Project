@@ -15,6 +15,7 @@ public class Main
 		String inputFileName = argv[0];
 		String outputFileName = argv[1];
 		String tokenName;
+		
 		try
 		{
 			/********************************/
@@ -48,8 +49,6 @@ public class Main
 				/********************************/
 				if(s.sym == TokenNames.LEXICAL_ERROR)
 				{
-					System.out.println("Lexical error encountered. line: " + l.getLine() + ", column: " + l.getTokenStartPosition());
-					System.out.println("Token:"+ l.yytext());
 					fileWriter.close();
 					fileWriter = new PrintWriter(outputFileName);
 					fileWriter.print("ERROR");
