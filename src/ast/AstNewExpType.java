@@ -4,9 +4,11 @@ public class AstNewExpType extends AstNewExp
 {
     public AstType type;
 
-    public AstNewExpType(AstType type)
+    public AstNewExpType(int lineNumber, AstType type)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
+        
         System.out.print("====================== newExp -> NEW type\n");
         this.type = type;
     }

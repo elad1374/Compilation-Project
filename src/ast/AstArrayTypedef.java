@@ -5,9 +5,10 @@ public class AstArrayTypedef extends AstDec
     public String name;
     public AstType type;
 
-    public AstArrayTypedef(String name, AstType type)
+    public AstArrayTypedef(int lineNumber, String name, AstType type)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
         
         System.out.format("====================== arrayTypedef -> ARRAY ID( %s ) EQ type LBRACK RBRACK SEMICOLON\n", name);
         

@@ -8,24 +8,26 @@ public class AstVarDec extends AstDec
     public AstNewExp newExp;   
 
     /*********************************************************/
-    /* CONSTRUCTOR 1: Declaration WITHOUT initialization     */
-    /* varDec ::= type ID SEMICOLON                        */
+    /* varDec ::= type ID SEMICOLON                          */
     /*********************************************************/
-    public AstVarDec(AstType type, String name)
+    public AstVarDec(int lineNumber, AstType type, String name)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
+
         System.out.format("====================== varDec -> type ID( %s ) SEMICOLON\n", name);
         this.type = type;
         this.name = name;
     }
 
     /*********************************************************/
-    /* CONSTRUCTOR 2: Declaration WITH standard exp          */
     /* varDec ::= type ID ASSIGN exp SEMICOLON               */
     /*********************************************************/
-    public AstVarDec(AstType type, String name, AstExp exp)
+    public AstVarDec(int lineNumber, AstType type, String name, AstExp exp)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
+
         System.out.format("====================== varDec -> type ID( %s ) ASSIGN exp SEMICOLON\n", name);
         this.type = type;
         this.name = name;
@@ -33,12 +35,13 @@ public class AstVarDec extends AstDec
     }
 
     /*********************************************************/
-    /* CONSTRUCTOR 3: Declaration WITH newExp                */
     /* varDec ::= type ID ASSIGN newExp SEMICOLON            */
     /*********************************************************/
-    public AstVarDec(AstType type, String name, AstNewExp newExp)
+    public AstVarDec(int lineNumber, AstType type, String name, AstNewExp newExp)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
+        
         System.out.format("====================== varDec -> type ID( %s ) ASSIGN newExp SEMICOLON\n", name);
         this.type = type;
         this.name = name;

@@ -2,9 +2,11 @@ package ast;
 
 public class AstTypeVoid extends AstType
 {
-    public AstTypeVoid()
+    public AstTypeVoid(int lineNumber)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
+        
         System.out.print("====================== type -> TYPE_VOID\n");
     }
 

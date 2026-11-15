@@ -7,12 +7,14 @@ public class AstExpParen extends AstExp
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AstExpParen(AstExp exp)
+	public AstExpParen(int lineNumber, AstExp exp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		serialNumber = AstNodeSerialNumber.getFresh();
+
+		this.lineNumber = lineNumber;
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
@@ -38,7 +40,7 @@ public class AstExpParen extends AstExp
 		/*****************************/
 		/* RECURSIVELY PRINT exp ... */
 		/*****************************/
-		if (var != null) exp.printMe();
+		if (exp != null) exp.printMe();
 
         /**********************************/
         /* Print to AST GRAPHVIZ DOT file */

@@ -9,12 +9,14 @@ public class AstExpBinop extends AstExp
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AstExpBinop(AstExp left, AstExp right, int op)
+	public AstExpBinop(int lineNumber, AstExp left, AstExp right, int op)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		serialNumber = AstNodeSerialNumber.getFresh();
+
+		this.lineNumber = lineNumber;
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */

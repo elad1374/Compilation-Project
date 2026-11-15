@@ -11,12 +11,14 @@ public class AstCField extends AstNode
     /*********************************************************/
     /* CONSTRUCTOR 1: When the field is a variable (varDec)  */
     /*********************************************************/
-    public AstCField(AstVarDec varDec)
+    public AstCField(int lineNumber, AstVarDec varDec)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */
@@ -33,12 +35,14 @@ public class AstCField extends AstNode
     /*********************************************************/
     /* CONSTRUCTOR 2: When the field is a method (funcDec)   */
     /*********************************************************/
-    public AstCField(AstFuncDec funcDec)
+    public AstCField(int lineNumber, AstFuncDec funcDec)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

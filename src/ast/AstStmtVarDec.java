@@ -7,12 +7,14 @@ public class AstStmtVarDec extends AstStmt
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstStmtVarDec(AstVarDec varDec)
+    public AstStmtVarDec(int lineNumber, AstVarDec varDec)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

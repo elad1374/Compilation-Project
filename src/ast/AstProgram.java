@@ -15,12 +15,14 @@ public class AstProgram extends AstNode
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstProgram(AstDecList decs)
+    public AstProgram(int lineNumber, AstDecList decs)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */
@@ -81,12 +83,14 @@ class AstDecList extends AstNode
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstDecList(AstDec head, AstDecList tail)
+    public AstDecList(int lineNumber, AstDec head, AstDecList tail)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

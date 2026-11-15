@@ -19,12 +19,14 @@ public class AstFuncDec extends AstDec
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstFuncDec(AstType returnType, String name, AstFormalList formals, AstStmtList body)
+    public AstFuncDec(int lineNumber, AstType returnType, String name, AstFormalList formals, AstStmtList body)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

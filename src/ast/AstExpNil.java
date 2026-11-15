@@ -5,12 +5,14 @@ public class AstExpNil extends AstExp
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AstExpNil()
+	public AstExpNil(int lineNumber)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		serialNumber = AstNodeSerialNumber.getFresh();
+
+		this.lineNumber = lineNumber;
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */

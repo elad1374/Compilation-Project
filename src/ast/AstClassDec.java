@@ -18,12 +18,14 @@ public class AstClassDec extends AstDec
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstClassDec(String name, String superClassName, AstCFieldList fields)
+    public AstClassDec(int lineNumber, String name, String superClassName, AstCFieldList fields)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */
@@ -92,12 +94,14 @@ class AstCFieldList extends AstNode
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstCFieldList(AstCField head, AstCFieldList tail)
+    public AstCFieldList(int lineNumber, AstCField head, AstCFieldList tail)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

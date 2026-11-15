@@ -7,12 +7,14 @@ public class AstStmtReturn extends AstStmt
     /*******************/
     /*  CONSTRUCTOR(S) */
     /*******************/
-    public AstStmtReturn(AstExp exp)
+    public AstStmtReturn(int lineNumber, AstExp exp)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
         /******************************/
         serialNumber = AstNodeSerialNumber.getFresh();
+
+        this.lineNumber = lineNumber;
 
         /***************************************/
         /* PRINT CORRESPONDING DERIVATION RULE */

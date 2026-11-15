@@ -2,9 +2,10 @@ package ast;
 
 public class AstTypeString extends AstType
 {
-    public AstTypeString()
+    public AstTypeString(int lineNumber)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+        this.lineNumber = lineNumber;
         System.out.print("====================== type -> TYPE_STRING\n");
     }
 

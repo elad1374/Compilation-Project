@@ -10,12 +10,14 @@ public class AstStmtAssign extends AstStmt
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AstStmtAssign(AstVar var, AstExp exp)
+	public AstStmtAssign(int lineNumber, AstVar var, AstExp exp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		serialNumber = AstNodeSerialNumber.getFresh();
+
+		this.lineNumber = lineNumber;
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
@@ -27,11 +29,14 @@ public class AstStmtAssign extends AstStmt
 		/*******************************/
 		this.var = var;
 		this.exp = exp;
+		this.lineNumber = lineNumber;
 	}
 
-	public AstStmtAssign(AstVar var, AstNewExp newExp)
+	public AstStmtAssign(int lineNumber, AstVar var, AstNewExp newExp)
     {
         serialNumber = AstNodeSerialNumber.getFresh();
+		this.lineNumber = lineNumber;
+		
         System.out.print("====================== stmt -> var ASSIGN newExp SEMICOLON\n");
         this.var = var;
         this.newExp = newExp;
