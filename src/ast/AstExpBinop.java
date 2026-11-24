@@ -2,7 +2,20 @@ package ast;
 
 public class AstExpBinop extends AstExp
 {
-	int op;
+	/*****************************************************/
+	/* Operator codes: pass one of these as the op value */
+	/*****************************************************/
+	public static final int PLUS   = 0;
+	public static final int MINUS  = 1;
+	public static final int TIMES  = 2;
+	public static final int DIVIDE = 3;
+	public static final int LT     = 4;
+	public static final int GT     = 5;
+	public static final int EQ     = 6;
+	public static final int AND    = 7;
+	public static final int OR     = 8;
+
+	public int op;
 	public AstExp left;
 	public AstExp right;
 	
@@ -41,15 +54,15 @@ public class AstExpBinop extends AstExp
 		/*********************************/
 		/* CONVERT op to a printable sop */
 		/*********************************/
-		if (op == 0) {sop = "+";}
-		if (op == 1) {sop = "-";}
-		if (op == 2) {sop = "*";}
-		if (op == 3) {sop = "/";}
-		if (op == 4) {sop = "<";}
-		if (op == 5) {sop = ">";}
-		if (op == 6) {sop = "=";}
-		if (op == 7) {sop = "and";}
-		if (op == 8) {sop = "or";}
+		if (op == PLUS)   {sop = "+";}
+		if (op == MINUS)  {sop = "-";}
+		if (op == TIMES)  {sop = "*";}
+		if (op == DIVIDE) {sop = "/";}
+		if (op == LT)     {sop = "<";}
+		if (op == GT)     {sop = ">";}
+		if (op == EQ)     {sop = "=";}
+		if (op == AND)    {sop = "and";}
+		if (op == OR)     {sop = "or";}
 		
 		/*************************************/
 		/* AST NODE TYPE = AST BINOP EXP */

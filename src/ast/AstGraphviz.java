@@ -1,5 +1,6 @@
 package ast;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 public class AstGraphviz
@@ -28,26 +29,32 @@ public class AstGraphviz
 		{
 			instance = new AstGraphviz();
 			
-			/****************************/
-			/* Initialize a file writer */
-			/****************************/
+			/********************************************************/
+			/* Initialize a file writer. The output folder may not  */
+			/* exist (it is not in git), so create it first. If the */
+			/* file still cannot be opened, fileWriter stays null   */
+			/* and all logging below is skipped: the AST image is a */
+			/* debug aid and must never crash the parser.           */
+			/********************************************************/
 			try
 			{
 				String dirname="./output/";
 				String filename="AST_IN_GRAPHVIZ_DOT_FORMAT.txt";
+				new File(dirname).mkdirs();
 				instance.fileWriter = new PrintWriter(dirname+filename);
+
+				/******************************************************/
+				/* Print Directed Graph header in Graphviz dot format */
+				/******************************************************/
+				instance.fileWriter.print("digraph\n");
+				instance.fileWriter.print("{\n");
+				instance.fileWriter.print("graph [ordering = \"out\"]\n");
 			}
 			catch (Exception e)
 			{
+				instance.fileWriter = null;
 				e.printStackTrace();
 			}
-
-			/******************************************************/
-			/* Print Directed Graph header in Graphviz dot format */
-			/******************************************************/
-			instance.fileWriter.print("digraph\n");
-			instance.fileWriter.print("{\n");
-			instance.fileWriter.print("graph [ordering = \"out\"]\n");
 		}
 		return instance;
 	}
@@ -57,6 +64,7 @@ public class AstGraphviz
 	/***********************************/
 	public void logNode(int nodeSerialNumber,String nodeName)
 	{
+		if (fileWriter == null) return;
 		fileWriter.format(
 			"v%d [label = \"%s\"];\n",
 			nodeSerialNumber,
@@ -70,6 +78,7 @@ public class AstGraphviz
 		int fatherNodeSerialNumber,
 		int sonNodeSerialNumber)
 	{
+		if (fileWriter == null) return;
 		fileWriter.format(
 			"v%d -> v%d;\n",
 			fatherNodeSerialNumber,
@@ -81,6 +90,7 @@ public class AstGraphviz
 	/******************************/
 	public void finalizeFile()
 	{
+		if (fileWriter == null) return;
 		fileWriter.print("}\n");
 		fileWriter.close();
 	}

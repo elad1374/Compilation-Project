@@ -18,14 +18,14 @@ public class AstTester {
 
         // 2. Create parameters (formals): int a, int b
         AstTypeInt typeA = new AstTypeInt(1);
-        AstFormal formalA = new AstFormal(typeA, "a");
+        AstFormal formalA = new AstFormal(1, typeA, "a");
 
         AstTypeInt typeB = new AstTypeInt(1);
-        AstFormal formalB = new AstFormal(typeB, "b");
+        AstFormal formalB = new AstFormal(1, typeB, "b");
 
         // Build the linked list of formals: (int a, int b)
-        AstFormalList formalsTail = new AstFormalList(formalB, null);
-        AstFormalList formals = new AstFormalList(formalA, formalsTail);
+        AstFormalList formalsTail = new AstFormalList(1, formalB, null);
+        AstFormalList formals = new AstFormalList(1, formalA, formalsTail);
 
         // 3. Create function body: return a + b;
         
