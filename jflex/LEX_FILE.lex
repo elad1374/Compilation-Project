@@ -175,6 +175,6 @@ COMMENT_CHAR      = [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\*\/\.\;]
     "*/"                { yybegin(YYINITIAL); }
     <<EOF>>             { return symbol(TokenNames.LEXICAL_ERROR); } 
     {COMMENT_CHAR}      { /*ignore*/}
-	{LineTerminator}    { /*ignore*/}
-    [^]                 { return symbol(TokenNames.LEXICAL_ERROR); } 
+    {LineTerminator}    { /*ignore*/}
+	[^]                 { return symbol(TokenNames.LEXICAL_ERROR); } 
 }
