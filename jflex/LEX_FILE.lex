@@ -153,7 +153,15 @@ COMMENT_CHAR      = [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\*\/\.\;]
 }
 {INVALID_0_INTEGER} { return symbol(TokenNames.LEXICAL_ERROR);}
 
-"//" { yybegin(YYCOMMENT_1); }
+"//" {COMMENT_CHAR}* {LineTerminator} {
+    // Valid Type-1 comment: ignore it.
+}
+
+"//" [^\r\n]* {LineTerminator} {
+    // Invalid character inside a Type-1 comment.
+    return symbol(TokenNames.LEXICAL_ERROR);
+}
+
 "/*" { yybegin(YYCOMMENT_2); }
 
 {ID} 				{ return symbol(TokenNames.ID, yytext());}
@@ -161,14 +169,6 @@ COMMENT_CHAR      = [a-zA-Z0-9 \t\(\)\[\]\{\}\?\!\+\-\*\/\.\;]
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 
 [^] 				{ return symbol(TokenNames.LEXICAL_ERROR);}
-}
-
-
-<YYCOMMENT_1> {
-    {LineTerminator}    { yybegin(YYINITIAL);}
-    <<EOF>>             { yybegin(YYINITIAL); return symbol(TokenNames.EOF);} 
-    {COMMENT_CHAR}      { /*ignore*/}
-    [^]                 { return symbol(TokenNames.LEXICAL_ERROR); }
 }
 
 <YYCOMMENT_2> {
