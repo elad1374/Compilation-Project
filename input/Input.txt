@@ -1,3 +1,12 @@
-GIDI := 60;
-AVROOM := 55 + GIDI;
-JACOB.sons[11] := JOSEF;
+void main()
+{
+    int t1 := 1 - 2 + 3;
+    int t2 := 1 + 2 * 3;
+    int t3 := 8 / 4 * 2;
+    int t4 := x or y and z;
+    int t5 := a < b = c;
+    int t6 := -5 * 3;
+    int t7 := a + b.f();
+    int t8 := x[i].f();
+    int t9 := (1 + 2) * 3;
+}
